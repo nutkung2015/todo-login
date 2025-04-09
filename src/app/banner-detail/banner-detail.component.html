@@ -1,0 +1,109 @@
+<div class="banner-page">
+    <!-- <div class="header">
+        <button mat-icon-button routerLink="/banners">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span>Banner Detail</span>
+    </div> -->
+
+    <div class="banner-container">
+        <div class="status-section">
+            <div class="status-item">
+                <div class="label">Status</div>
+                <div class="value status-badge" [ngClass]="'status-' + bannerDetail.status">{{bannerDetail.status}}
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="label">Publish Date</div>
+                <div class="value">{{bannerDetail.publishDate | date:'dd MMM yyyy HH:mm:ss'}} - <br>
+                    {{bannerDetail.publishEnd | date:'dd MMM yyyy HH:mm:ss'}}</div>
+                <div class="sub-text">By: {{bannerDetail.create_by}}</div>
+            </div>
+            <div class="status-item">
+                <div class="label">Published Date</div>
+                <div class="value">{{bannerDetail.createDate | date:'dd MMM yyyy HH:mm:ss'}}</div>
+                <div class="sub-text">By: {{bannerDetail.create_by}}</div>
+            </div>
+            <div class="status-item">
+                <div class="label">Created Date</div>
+                <div class="value">{{bannerDetail.lastUpdate | date:'dd MMM yyyy HH:mm:ss'}}</div>
+                <div class="sub-text">By: {{bannerDetail.last_update_by}}</div>
+            </div>
+        </div>
+
+        <div class="area-form">
+            <div class="banner-content">
+                <div class="section-title">Banner Image</div>
+                <div class="image-container">
+                    <div class="img-space">
+                        <img [src]="bannerDetail.image" alt="Banner image">
+                    </div>
+                    <div class="image-info">File Size: Width=1377x566, File file size: 15KB</div>
+                </div>
+
+                <div class="banner-details">
+                    <div class="detail-item" fxLayout="column" fxLayoutAlign="start start">
+                        <div class="label">User Received</div>
+                        <mat-form-field appearance="outline" fxFill>
+                            <mat-select [(ngModel)]="bannerDetail.userReceived" disabled>
+                                <mat-option value="alluser">All User</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="label" fxLayout="column" fxLayoutAlign="start start">Publish Date</div>
+                        <mat-radio-group [(ngModel)]="publishType" disabled>
+                            <mat-radio-button value="publish-now">Publish Now (No Schedule)</mat-radio-button>
+                            <mat-radio-button value="schedule-start">Schedule Start Date Only</mat-radio-button>
+                            <mat-radio-button value="schedule-range">Schedule Start-End Date</mat-radio-button>
+                        </mat-radio-group>
+
+                        <div class="date-range" *ngIf="publishType === 'schedule-range'">
+                            <mat-form-field appearance="outline" fxFill>
+                                <input matInput [value]="getDateRange()" disabled>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="date-single" *ngIf="publishType === 'schedule-start'" fxLayout="column"
+                            fxLayoutAlign="start start">
+                            <mat-form-field appearance="outline" fxFlex>
+                                <input matInput [value]="bannerDetail.publishDate | date:'dd MMM yyyy'" disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="label">Navigate To</div>
+                        <mat-radio-group [(ngModel)]="navigationType" disabled class="radio-group">
+                            <div class="radio-option" fxLayout="column" fxLayoutAlign="start start">
+                                <mat-radio-button value="internal">Open Webview (Internal)</mat-radio-button>
+                                <mat-form-field appearance="outline" class="nav-input" fxFlex
+                                    *ngIf="navigationType === 'internal' && bannerDetail.navTo">
+                                    <input matInput [(ngModel)]="bannerDetail.navTo" disabled>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="radio-option" fxLayout="column" fxLayoutAlign="start start">
+                                <mat-radio-button value="external">Open with other browser (External)</mat-radio-button>
+                                <mat-form-field appearance="outline" class="nav-input" fxFlex
+                                    *ngIf="navigationType === 'external' && bannerDetail.navTo">
+                                    <input matInput [(ngModel)]="bannerDetail.navTo" disabled>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="radio-option" fxLayout="column" fxLayoutAlign="start start">
+                                <mat-radio-button value="inapp">Open In-app page</mat-radio-button>
+                                <mat-form-field appearance="outline" class="nav-input" fxFlex
+                                    *ngIf="navigationType === 'inapp' && bannerDetail.navTo">
+                                    <input matInput [(ngModel)]="bannerDetail.navTo" disabled>
+                                </mat-form-field>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

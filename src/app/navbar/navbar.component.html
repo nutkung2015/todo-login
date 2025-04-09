@@ -1,0 +1,46 @@
+<mat-toolbar class="navbar-1">
+    <div class="nav-content">
+
+        <div class="nav-right">
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                <mat-icon>account_circle</mat-icon>
+                <span>Nanthpat Chakaew</span>
+                <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>person</mat-icon>
+                    <span>Profile</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>logout</mat-icon>
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+
+</mat-toolbar>
+<mat-toolbar class="navbar-2">
+    <div class="nav-content-1">
+        <div class="nav-left">
+
+            <div class="breadcrumb">
+                <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+                    <span>{{crumb}}</span>
+                    <span class="separator" *ngIf="!last">/</span>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="title-bar" fxLayout="row">
+        <div class="btn-back" fxFlex="10px">
+            <button mat-icon-button (click)=" goBack()">
+                <mat-icon fxLayout="column" fxLayoutAlign="start center">arrow_back</mat-icon>
+            </button>
+        </div>
+        <div>
+            <h2 fxLayout="column" class="name-page" fxLayoutAlign="center center">{{currentPage}}</h2>
+        </div>
+    </div>
+</mat-toolbar>

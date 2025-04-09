@@ -1,0 +1,91 @@
+<div class="table-page">
+    <div class="filter-container">
+        <input type="text" [(ngModel)]="searchText" (input)="searchData()" placeholder="Search by Navigation"
+            class="search-input">
+
+        <div class="filter-bar">
+            <label for="sortSelect">Sort by</label>
+            <select id="sortSelect" [(ngModel)]="sortDirection" (change)="onSortChange($event)">
+                <option value="desc">Newest</option>
+                <option value="asc">Oldest</option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 modern-table" matSort>
+            <!-- No Column -->
+            <ng-container matColumnDef="no">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <td mat-cell *matCellDef="let element"> {{ element.no }} </td>
+            </ng-container>
+
+            <!-- User Received Column -->
+            <ng-container matColumnDef="user_received">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> User Received </th>
+                <td mat-cell *matCellDef="let element" class="user-cell"> {{ element.user_received }} </td>
+            </ng-container>
+
+            <!-- Navigation Column -->
+            <ng-container matColumnDef="navTo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Navigation </th>
+                <td mat-cell *matCellDef="let element" class="nav-cell"> {{ element.navTo }} </td>
+            </ng-container>
+
+            <!-- Publish Date Column -->
+            <ng-container matColumnDef="publishDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish Date </th>
+                <td mat-cell *matCellDef="let element" class="date-cell">
+                    <div>{{ element.publishDate }} <br> {{ element.publish_end }}</div>
+                </td>
+            </ng-container>
+
+            <!-- Create Date Column -->
+            <ng-container matColumnDef="createDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Create Date </th>
+                <td mat-cell *matCellDef="let element" class="date-cell">
+                    <div class="create">
+                        {{ element.createDate }}
+                    </div>
+                    <div class="create_by">
+                        by: {{ element.create_by }}
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Last Update Column -->
+            <ng-container matColumnDef="lastUpdate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Update </th>
+                <td mat-cell *matCellDef="let element" class="date-cell">
+                    <div class="lastUpdate">
+                        {{ element.lastUpdate }}
+                    </div>
+                    <div class="last_update_by">
+                        by: {{ element.last_update_by }}
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="status-badge" [ngClass]="{
+                        'status-publish': element.status === 'publish',
+                        'status-unpublish': element.status === 'unpublish',
+                        'status-scheduled': element.status === 'scheduled'
+                    }">
+                        {{ element.status }}
+                    </span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+        </table>
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

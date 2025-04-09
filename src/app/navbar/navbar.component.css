@@ -1,0 +1,65 @@
+.navbar-1 {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-2 {
+    background-color: rgb(255, 255, 255);
+    padding: 0 16px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-content {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.nav-content-1 {
+    width: 100%;
+    align-items: flex-start;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.breadcrumb {
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.name-page {
+    display: block;
+    margin-left: 40px;
+    margin-bottom: 16px;
+}
+
+.name-page h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+::ng-deep .mat-menu-content {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+::ng-deep .mat-menu-item .mat-icon {
+    margin-right: 8px;
+}

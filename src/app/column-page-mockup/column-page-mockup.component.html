@@ -1,0 +1,192 @@
+<div class="table-page">
+
+    <div class="bg-table-contain" fxLayout="column">
+        <div class="table-container" fxLayout="column">
+            <div class="filter-container" fxLayout="column" fxLayoutGap="0px">
+                <div fxLayout="row" fxLayoutGap="0px" fxLayoutAlign="space-between center">
+                    <div class="filter-group" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px"
+                        fxFlex="1 1 auto">
+                        <span fxFlex="100px">User Received</span>
+                        <mat-form-field appearance="outline" fxFlex="1 1 auto">
+                            <mat-select [(ngModel)]="filterUserReceived">
+                                <mat-option value="all">All User</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter-group" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px"
+                        fxFlex="1 1 auto">
+                        <span fxFlex="100px">Publish Date</span>
+                        <mat-form-field appearance="outline" fxFlex="1 1 auto">
+                            <mat-date-range-input [rangePicker]="publishPicker">
+                                <input matStartDate placeholder="Start">
+                                <input matEndDate placeholder="                       End">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="publishPicker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #publishPicker></mat-date-range-picker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter-group" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px"
+                        fxFlex="1 1 auto">
+                        <span fxFlex="100px">Created Date</span>
+                        <mat-form-field appearance="outline" fxFlex="1 1 auto">
+                            <mat-date-range-input [rangePicker]="createPicker">
+                                <input matStartDate placeholder="Start">
+                                <input matEndDate placeholder="                       End">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="createPicker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #createPicker></mat-date-range-picker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="filter-group-2" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
+                        <span fxFlex="100px">Status</span>
+                        <mat-form-field appearance="outline" fxFlex="340px">
+                            <mat-select [(ngModel)]="filterStatus">
+                                <mat-option value="all">Select</mat-option>
+                                <mat-option value="publish">Publish</mat-option>
+                                <mat-option value="unpublish">Unpublish</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="action-buttons" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+                        <button mat-button (click)="reset()">Reset</button>
+                        <button mat-raised-button color="primary" (click)="search()">
+                            <mat-icon>search</mat-icon>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-header" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="results-count">1-30 from 150 Results</div>
+                <button mat-raised-button color="primary" class="create-banner-btn" routerLink="/create-banner">
+                    <mat-icon>add</mat-icon>
+                    Create Banner
+                </button>
+            </div>
+
+
+            <hr>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 modern-table" matSort cdkDropList
+                (cdkDropListDropped)="drop($event)">
+
+                <!-- drag handle -->
+                <ng-container matColumnDef="dragHandle">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element" cdkDragHandle class="drag-cell">
+                        <mat-icon class="drag-handle">drag_indicator</mat-icon>
+                    </td>
+                </ng-container>
+                <!-- No Column -->
+                <ng-container matColumnDef="no">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.no }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef> Thumbnail </th>
+                    <td mat-cell *matCellDef="let element" class="thumbnail-cell">
+                        <img [src]="element.image" alt="Banner thumbnail" class="thumbnail-image">
+                    </td>
+                </ng-container>
+
+                <!-- User Received Column -->
+                <ng-container matColumnDef="user_received">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> User Received </th>
+                    <td mat-cell *matCellDef="let element" class="user-cell"> {{ element.user_received }} </td>
+                </ng-container>
+
+                <!-- Navigation Column -->
+                <ng-container matColumnDef="navTo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Navigation </th>
+                    <td mat-cell *matCellDef="let element" class="nav-cell"> {{ element.navTo }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="view">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> View </th>
+                    <td mat-cell *matCellDef="let element" class="view-cell"> {{ element.view }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="click">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Click </th>
+                    <td mat-cell *matCellDef="let element" class="click-cell"> {{ element.click }} </td>
+                </ng-container>
+
+                <!-- Publish Date Column -->
+                <ng-container matColumnDef="publishDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish Date </th>
+                    <td mat-cell *matCellDef="let element" class="date-cell">
+                        <div>{{ element.publishDate }} <br> {{ element.publish_end }}</div>
+                    </td>
+                </ng-container>
+
+                <!-- Create Date Column -->
+                <ng-container matColumnDef="createDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Create Date </th>
+                    <td mat-cell *matCellDef="let element" class="date-cell">
+                        <div class="create">
+                            {{ element.createDate }}
+                        </div>
+                        <div class="create_by">
+                            by: {{ element.create_by }}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Last Update Column -->
+                <ng-container matColumnDef="lastUpdate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Update </th>
+                    <td mat-cell *matCellDef="let element" class="date-cell">
+                        <div class="lastUpdate">
+                            {{ element.lastUpdate }}
+                        </div>
+                        <div class="last_update_by">
+                            by: {{ element.last_update_by }}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="status-badge" [ngClass]="{
+                        'status-publish': element.status === 'publish',
+                        'status-unpublish': element.status === 'unpublish',
+                        'status-scheduled': element.status === 'scheduled'
+                    }">
+                            {{ element.status }}
+                        </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                    <td mat-cell *matCellDef="let element" class="action-cell">
+                        <a class="link" [routerLink]="['/banner-detail', element.no]">ViewDetail</a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"
+                    class="data-row">
+                    <div *cdkDragPreview>
+                        <mat-card class="drag-preview">
+                            {{row.no}} - {{row.user_received}}
+                        </mat-card>
+                    </div>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+</div>

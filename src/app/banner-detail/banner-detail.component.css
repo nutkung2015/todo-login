@@ -1,0 +1,161 @@
+.banner-page {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  /* .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    
+    span {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  } */
+
+  .area-form{
+    width: 50%;
+    /* background-color: rgb(210, 163, 163); */
+  }
+  
+  .banner-container {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+  }
+  
+  .status-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+    
+    .status-item {
+      .value {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      
+      .sub-text {
+        color: #666;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  ::ng-deep .radio-option {
+    margin-top: 10px;
+
+  }
+
+  ::ng-deep .mat-radio-button {
+    min-width: 200px;
+    margin-top: 10px;
+  }
+
+  
+
+  .label {
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .banner-content {
+    .section-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    
+    .image-container {
+      margin-bottom: 24px;
+      width: 100%;
+      
+        .img-space{
+            background-color: #d8d8d8;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+      img {
+        /* max-width: 100%; */
+        max-height: 200px;
+        border-radius: 4px;
+        width: 100%;
+        aspect-ratio: cover;
+      }
+      
+      .image-info {
+        color: #666;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+    }
+  }
+
+  ::ng-deep .mat-form-field-infix{
+    border-top: none;
+  }
+  
+  .banner-details {
+    .detail-item {
+      margin-bottom: 24px;
+      
+
+      .label {
+        margin-bottom: 8px;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    }
+    
+    .date-range {
+      display: flex;
+      align-items: center;
+      
+    }
+    
+    mat-radio-group {
+      display: flex;
+      flex-direction: column;
+      /* gap: 16px; */
+      margin-bottom: 16px;
+    }
+
+    .mat-form-field-flex{
+        width: 100%;
+        border-radius: 10px !important;
+        height: 35px;
+        margin-top: 5px;
+    }
+    
+    .nav-input {
+      width: 100%;
+    }
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    
+    &.status-publish {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    &.status-unpublish {
+      background: #ffebee;
+      color: #c62828;
+    }
+  }

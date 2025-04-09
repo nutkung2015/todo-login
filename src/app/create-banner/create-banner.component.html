@@ -1,0 +1,157 @@
+<div class="bg-container">
+    <div class="create-banner-container">
+        <div class="area-form">
+            <form [formGroup]="bannerForm" (ngSubmit)="onSubmit()">
+                <!-- Banner Image Upload -->
+                <div class="upload-section">
+                    <h3>Banner Image</h3>
+
+                    <div class="upload-space">
+                        <div class="upload-box" (click)="fileInput.click()" *ngIf="!selectedImage">
+                            <input #fileInput type="file" hidden (change)="onFileSelected($event)" accept="image/*">
+                            <mat-icon>add</mat-icon>
+                            <p>Click or drag file to this area to upload</p>
+                            <span class="upload-hint">File size resolution: 1372x560, Max file size 5MB</span>
+                        </div>
+                        <div class="img-padding">
+                            <div class="image-preview" *ngIf="selectedImage">
+                                <img [src]="selectedImage" alt="Banner preview">
+                                <button mat-icon-button class="remove-image" (click)="removeImage()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Banner Details -->
+                <div class="banner-details">
+                    <h3>Banner Detail</h3>
+
+                    <div class="width-detail">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label class="mat-received">User Received</mat-label>
+                            <mat-select formControlName="userReceived" required>
+                                <mat-option value="all">All Users</mat-option>
+                                <!-- Add more options as needed -->
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+
+                    <!-- Publish Date -->
+                    <div class="publish-section">
+                        <h4>* Publish Date</h4>
+
+                        <div class="width-section">
+                            <mat-radio-group formControlName="publishType">
+                                <mat-radio-button value="now">
+                                    Publish Now (No Schedule)
+                                </mat-radio-button>
+
+                                <mat-radio-button value="schedule">
+                                    Schedule Start Date Only
+                                    <div class="date-fields">
+                                        <div class="date-input">
+                                            <input placeholder="Select Start Date" matInput
+                                                [matDatepicker]="startPicker" formControlName="startDate">
+                                            <mat-datepicker-toggle matSuffix
+                                                [for]="startPicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #startPicker></mat-datepicker>
+                                        </div>
+
+                                        <div class="time-input">
+                                            <input placeholder="Select Start Time" matInput type="time"
+                                                formControlName="startTime" class="input-time">
+                                            <!-- <mat-icon matSuffix>schedule</mat-icon> -->
+                                        </div>
+                                    </div>
+                                </mat-radio-button>
+
+                                <mat-radio-button value="range">
+                                    Schedule Start-End
+                                    <div class="schedule-range">
+                                        <p class="input-label">Start-End Date</p>
+                                        <div class="date-input_2">
+
+                                            <!-- <mat-label>Enter a date range</mat-label> -->
+                                            <mat-date-range-input [rangePicker]="rangePicker">
+                                                <input matStartDate placeholder="Start date"
+                                                    formControlName="startDate">
+                                                <input matEndDate placeholder="End date" formControlName="endDate">
+                                            </mat-date-range-input>
+                                            <mat-datepicker-toggle matSuffix
+                                                [for]="rangePicker"></mat-datepicker-toggle>
+                                            <mat-date-range-picker #rangePicker></mat-date-range-picker>
+
+                                        </div>
+
+                                        <p class="input-label">Start-End Time</p>
+                                        <div class="time-inputs">
+                                            <div class="time-input">
+                                                <input placeholder="Select Start Time" matInput type="time"
+                                                    formControlName="startTime">
+                                                <!-- <mat-icon matSuffix>schedule</mat-icon> -->
+                                            </div>
+                                            <div class="time-input">
+                                                <input placeholder="Select End Time" matInput type="time"
+                                                    formControlName="endTime">
+                                                <!-- <mat-icon matSuffix>schedule</mat-icon> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Navigate To -->
+                    <div class="navigate-section">
+                        <h4>Navigate To</h4>
+                        <mat-radio-group formControlName="navigateTo" class="nav-radio-group">
+                            <div class="nav-option">
+                                <mat-radio-button value="internal">Open Webview (Internal)</mat-radio-button>
+                                <div class="nav-input">
+                                    <input placeholder="Link" matInput formControlName="internalUrl"
+                                        class="nav-input-1">
+                                    <input placeholder="Url" matInput formControlName="internalUrlSuffix"
+                                        class="nav-input-2">
+                                </div>
+                            </div>
+
+                            <div class="nav-option">
+                                <mat-radio-button value="external">Open with other browser (External)</mat-radio-button>
+                                <div class="nav-input">
+                                    <input placeholder="Link" matInput formControlName="externalUrl">
+                                    <input placeholder="Url" matInput formControlName="externalUrlSuffix">
+                                </div>
+                            </div>
+
+                            <div class="nav-option">
+                                <mat-radio-button value="inapp">Open In-app page</mat-radio-button>
+                                <mat-form-field appearance="outline" class="page-select">
+                                    <mat-select placeholder="Select Page" formControlName="inappPage">
+                                        <mat-option value="page1">Page 1</mat-option>
+                                        <mat-option value="page2">Page 2</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit"
+                        [disabled]="!isFormValid">
+                        Publish Now
+                    </button>
+                    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
