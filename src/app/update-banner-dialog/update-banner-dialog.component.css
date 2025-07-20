@@ -1,0 +1,190 @@
+.upload-space {
+    margin: 20px 0;
+  }
+  
+  .upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .upload-box:hover {
+    border-color: #666;
+  }
+  
+  .upload-hint {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .image-preview {
+    position: relative;
+    margin-top: 10px;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: white;
+  }
+  
+  .img-padding {
+    padding: 10px 0;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-row > * {
+    flex: 1;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.upload-space {
+    margin: 20px 0;
+}
+
+.upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+.upload-box:hover {
+    border-color: #666;
+}
+
+.date-time-group {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+}
+
+.date-time-group > * {
+    flex: 1;
+}
+
+mat-dialog-content {
+    min-width: 500px;
+}
+
+.publish-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.mat-radio-button {
+  display: block;
+  padding: 16px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.date-fields, .schedule-range {
+  margin-left: 32px;
+  margin-top: 16px;
+}
+
+
+.date-input, .time-input {
+    margin-top: 8px;
+    width: 100% !important;
+}
+
+.time-inputs {
+    display: flex;
+    gap: 16px;
+}
+
+.mat-radio-label-content{
+  width: 100% !important;
+}
+
+.time-input input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: white;
+}
+
+.input-label {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.date-input_2 {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep .mat-date-range-input-container {
+  width: 100%;
+}
+
+.input-time {
+    width: 100% ;
+}
+
+:host ::ng-deep .mat-date-range-input-start-wrapper,
+:host ::ng-deep .mat-date-range-input-end-wrapper {
+  flex: 1;
+}
+
+:host ::ng-deep .mat-date-range-input-separator {
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0 8px;
+}
+
+:host ::ng-deep .mat-date-range-input input {
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+}
+
+:host ::ng-deep .mat-date-range-input input::placeholder {
+  color: rgba(0, 0, 0, 0.42);
+}
+
+:host ::ng-deep .mat-form-field {
+  width: 100% !important;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  margin-bottom: 0;
+}
+
+.date-fields:hover,
+.schedule-range:hover {
+  background: #eeeeee;
+  transition: background-color 0.3s;
+} 

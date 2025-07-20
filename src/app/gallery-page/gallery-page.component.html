@@ -1,0 +1,10 @@
+<div class="gallery-bg">
+  <button class="back-button" routerLink="/home">←</button>
+  <div class="gallery-container">
+    <h1>รวมรูปหลุดแฟนนนน</h1>
+    <div class="gallery-grid">
+      <img *ngFor="let img of images" [src]="img" alt="funny" />
+    </div>
+    <button routerLink="/home">กลับหน้าหลัก</button>
+  </div>
+</div> 

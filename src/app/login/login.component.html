@@ -4,14 +4,15 @@
         <form [formGroup]="form">
             <!-- Email Field -->
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" formControlName="email" required />
-                <div *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched"
+                <label for="username">Username:</label>
+                <input type="username" id="username" formControlName="username" required />
+                <div *ngIf="form.get('username')?.errors?.['required'] && form.get('username')?.touched"
                     class="error-message">
-                    ❌ กรุณากรอกอีเมล
+                    ❌ กรุณากรอก username
                 </div>
-                <div *ngIf="form.get('email')?.errors?.['email'] && form.get('email')?.touched" class="error-message">
-                    ❌ กรุณากรอกอีเมลให้ถูกต้อง
+                <div *ngIf="form.get('username')?.errors?.['username'] && form.get('username')?.touched"
+                    class="error-message">
+                    ❌ กรุณากรอก username ให้ถูกต้อง
                 </div>
             </div>
 
@@ -30,6 +31,10 @@
             </div>
 
             <button type="submit" class="login-button" (click)="checkAndSubmit()">Login</button>
+            <div class="register-section">
+                <span>Don't have an account?</span>
+                <button type="button" class="register-button" (click)="goToRegister()">Register</button>
+            </div>
         </form>
     </div>
 </div>

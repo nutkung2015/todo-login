@@ -1,1 +1,48 @@
-<p>register works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" formControlName="username" required />
+                <div *ngIf="registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched"
+                    class="error-message">
+                    ❌ กรุณากรอก Username
+                </div>
+            </div>
+
+            <!-- Email Field -->
+
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" formControlName="password" required />
+                <div *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched"
+                    class="error-message">
+                    ❌ กรุณากรอกรหัสผ่าน
+                </div>
+                <div *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched"
+                    class="error-message">
+                    ❌ รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร
+                </div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" formControlName="confirmPassword" required />
+                <div *ngIf="registerForm.errors?.['passwordMismatch']" class="error-message">
+                    ❌ รหัสผ่านไม่ตรงกัน
+                </div>
+            </div>
+
+            <button type="submit" class="register-button" [disabled]="!registerForm.valid">Register</button>
+            <div class="login-link">
+                <span>Already have an account?</span>
+                <button type="button" class="login-button" (click)="goToLogin()">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

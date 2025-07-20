@@ -34,7 +34,7 @@
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label class="mat-received">User Received</mat-label>
                             <mat-select formControlName="userReceived" required>
-                                <mat-option value="all">All Users</mat-option>
+                                <mat-option value="alluser">All Users</mat-option>
                                 <!-- Add more options as needed -->
                             </mat-select>
                         </mat-form-field>
@@ -47,11 +47,11 @@
 
                         <div class="width-section">
                             <mat-radio-group formControlName="publishType">
-                                <mat-radio-button value="now">
+                                <mat-radio-button value=0>
                                     Publish Now (No Schedule)
                                 </mat-radio-button>
 
-                                <mat-radio-button value="schedule">
+                                <mat-radio-button value=1>
                                     Schedule Start Date Only
                                     <div class="date-fields">
                                         <div class="date-input">
@@ -70,7 +70,7 @@
                                     </div>
                                 </mat-radio-button>
 
-                                <mat-radio-button value="range">
+                                <mat-radio-button value=2>
                                     Schedule Start-End
                                     <div class="schedule-range">
                                         <p class="input-label">Start-End Date</p>
@@ -114,25 +114,21 @@
                         <h4>Navigate To</h4>
                         <mat-radio-group formControlName="navigateTo" class="nav-radio-group">
                             <div class="nav-option">
-                                <mat-radio-button value="internal">Open Webview (Internal)</mat-radio-button>
+                                <mat-radio-button value="1">Open Webview (Internal)</mat-radio-button>
                                 <div class="nav-input">
-                                    <input placeholder="Link" matInput formControlName="internalUrl"
-                                        class="nav-input-1">
-                                    <input placeholder="Url" matInput formControlName="internalUrlSuffix"
-                                        class="nav-input-2">
+                                    <input placeholder="Url" matInput formControlName="internalUrl" class="nav-input-2">
                                 </div>
                             </div>
 
                             <div class="nav-option">
-                                <mat-radio-button value="external">Open with other browser (External)</mat-radio-button>
+                                <mat-radio-button value="2">Open with other browser (External)</mat-radio-button>
                                 <div class="nav-input">
-                                    <input placeholder="Link" matInput formControlName="externalUrl">
-                                    <input placeholder="Url" matInput formControlName="externalUrlSuffix">
+                                    <input placeholder="Url" matInput formControlName="externalUrl">
                                 </div>
                             </div>
 
                             <div class="nav-option">
-                                <mat-radio-button value="inapp">Open In-app page</mat-radio-button>
+                                <mat-radio-button value="3">Open In-app page</mat-radio-button>
                                 <mat-form-field appearance="outline" class="page-select">
                                     <mat-select placeholder="Select Page" formControlName="inappPage">
                                         <mat-option value="page1">Page 1</mat-option>
@@ -144,8 +140,7 @@
                     </div>
                 </div>
                 <div class="action-buttons">
-                    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit"
-                        [disabled]="!isFormValid">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid">
                         Publish Now
                     </button>
                     <button mat-button type="button" (click)="onCancel()">Cancel</button>

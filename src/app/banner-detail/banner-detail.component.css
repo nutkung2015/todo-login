@@ -149,13 +149,15 @@
     border-radius: 16px;
     font-size: 14px;
     
-    &.status-publish {
+    & .status-publish {
       background: #e8f5e9;
       color: #2e7d32;
     }
     
-    &.status-unpublish {
+    & .status-unpublish {
       background: #ffebee;
       color: #c62828;
     }
   }
+
+  

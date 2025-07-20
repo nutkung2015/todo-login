@@ -37,6 +37,25 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { ColumnPageMockupComponent } from './column-page-mockup/column-page-mockup.component';
 import { BannerDetailComponent } from './banner-detail/banner-detail.component';
+import { UpdateBannerDialogComponent } from './update-banner-dialog/update-banner-dialog.component';
+import { AuthService } from './services/auth.service';
+// import { BrandNamePipe } from './product-table/brand-name.pipe';
+
+//environment
+import { environment } from 'src/environments/environment';
+
+//firebase
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { GetDataComponent } from './get-data/get-data.component';
+import { ProductTableComponent } from './product-table/product-table.component'
+import { GalleryPageComponent } from './gallery-page/gallery-page.component';
+import { PinPageComponent } from './pin-page/pin-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { GamePageComponent } from './game-page/game-page.component';
+import { GreetingPageComponent } from './greeting-page/greeting-page.component';
 
 
 
@@ -56,6 +75,15 @@ import { BannerDetailComponent } from './banner-detail/banner-detail.component';
     NavbarComponent,
     ColumnPageMockupComponent,
     BannerDetailComponent,
+    UpdateBannerDialogComponent,
+    GetDataComponent,
+    ProductTableComponent,
+    //shebew
+    GalleryPageComponent,
+    PinPageComponent,
+    HomePageComponent,
+    GamePageComponent,
+    GreetingPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,9 +108,16 @@ import { BannerDetailComponent } from './banner-detail/banner-detail.component';
     MatFormFieldModule,
     FlexLayoutModule,
     MatCardModule,
-    DragDropModule
+    DragDropModule,
+    MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,  // For Authentication
+    AngularFireDatabaseModule,  // For Realtime Database
+    AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

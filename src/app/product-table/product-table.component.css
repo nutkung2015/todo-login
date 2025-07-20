@@ -1,0 +1,33 @@
+.container {
+    padding: 20px;
+  }
+  
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .search, .brand-filter {
+    width: 45%;
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .brand-option {
+    color: black !important;
+  }
+
+  ::ng-deep .mat-form-field-flex {
+    border-radius: 10px !important;
+    text-decoration: none !important;
+  }

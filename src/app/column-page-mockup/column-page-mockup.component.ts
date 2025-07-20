@@ -4,6 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+
 
 
 export interface itemsCol {
@@ -19,61 +23,7 @@ export interface itemsCol {
   status: string;
 }
 
-const MOCK_DATA = {
-  "meta": {
-    "response_datetime": "2025/04/07, 20:11:10",
-    "response_desc": "success",
-    "response_code": 20000,
-    "response_data": [
-      {
-        "id": 1,
-        "page": 1,
-        "type": "banner",
-        "video": null,
-        "image": "https://f.ptcdn.info/701/081/000/s10i9m204kbPRd9r4lpZ2-o.jpg",
-        "title": "",
-        "description": "",
-        "create_at": "2024-09-11T14:38:22.372150+07:00",
-        "create_by": "superadmin charge24",
-        "check_publish_button": 1,
-        "publish_start": "2024-09-13T09:53:22.428000+07:00",
-        "publish_end": "2029-09-13T00:00:22.428000+07:00",
-        "user_received": "alluser",
-        "last_update_at": "2024-09-13T09:53:22.730201+07:00",
-        "last_update_by": "Admin Charge24",
-        "status": "publish",
-        "check_nav_button": 1,
-        "nav_to": "Test",
-        "view": 1,
-        "click": 0,
-        "operator": "charge24"
-      },
-      {
-        "id": 2,
-        "page": 2,
-        "type": "banner",
-        "video": null,
-        "image": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/youtube-live-thumbnail-for-gaming-design-template-06e4210a79a26bc99a52e0374f01663d_screen.jpg?ts=1633602824",
-        "title": "",
-        "description": "",
-        "create_at": "2024-11-19T14:08:14.883840+07:00",
-        "create_by": "Admin Charge24",
-        "check_publish_button": 1,
-        "publish_start": "2024-11-19T14:08:13.990000+07:00",
-        "publish_end": "2029-11-19T00:00:13.990000+07:00",
-        "user_received": "alluser",
-        "last_update_at": "2024-11-19T14:08:14.883840+07:00",
-        "last_update_by": "Admin Charge24",
-        "status": "publish",
-        "check_nav_button": 1,
-        "nav_to": "https://www.sanook.com/",
-        "view": 2,
-        "click": 0,
-        "operator": "charge24"
-      }
-    ]
-  }
-};
+
 
 @Component({
   selector: 'app-column-page-mockup',
@@ -81,6 +31,7 @@ const MOCK_DATA = {
   styleUrls: ['./column-page-mockup.component.css']
 })
 export class ColumnPageMockupComponent implements OnInit {
+  private apiUrl = 'http://192.168.1.134:8000/showCatalog';
 
   // ชื่อคอลัมน์ต้องตรงกับ matColumnDef ใน HTML
   displayedColumns: string[] = ['dragHandle', 'no', 'image', 'user_received', 'view', 'click', 'navTo', 'publishDate', 'createDate', 'lastUpdate', 'status', 'action'];
@@ -107,7 +58,11 @@ export class ColumnPageMockupComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.getData();
@@ -122,29 +77,49 @@ export class ColumnPageMockupComponent implements OnInit {
 
   // ใช้ GetItems() จาก service ในการดึงข้อมูล API
   getData(): void {
-    // ใช้ mock data แทนการเรียก API
-    const response = MOCK_DATA;
-    if (response && response.meta && response.meta.response_data) {
-      this.dataSource.data = response.meta.response_data.map((item: any) => ({
-        no: item.id,
-        image: item.image,
-        user_received: item.user_received,
-        navTo: item.nav_to,
-        view: item.view,
-        click: item.click,
-        publishDate: new Date(item.publish_start).toLocaleDateString(),
-        publish_end: new Date(item.publish_end).toLocaleDateString(),
-        create_by: item.create_by,
-        last_update_by: item.last_update_by,
-        createDate: new Date(item.create_at).toLocaleDateString(),
-        lastUpdate: new Date(item.last_update_at).toLocaleDateString(),
-        status: item.status
-      }));
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    const token = this.authService.getToken();
+    const headers = { 'Authorization': `Bearer ${token}` };
 
-      this.sortData();
-    }
+    console.log("token", token)
+
+    this.http.get(this.apiUrl, { headers }).subscribe({
+      next: (response: any) => {
+        if (response?.meta?.response_data) {
+          this.dataSource.data = response.meta.response_data.map((item: any) => ({
+            no: item.id,
+            image: item.image,
+            user_received: item.user_received,
+            navTo: item.nav_to,
+            view: item.view,
+            click: item.click,
+            publishDate: new Date(item.publish_start).toLocaleDateString(),
+            publish_end: new Date(item.publish_end).toLocaleDateString(),
+            create_by: item.create_by,
+            last_update_by: item.last_update_by,
+            createDate: item.created_at ? new Date(item.created_at).toLocaleString('en-GB', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            }) : '-',
+            lastUpdate: new Date(item.last_update_at).toLocaleDateString(),
+            status: item.status
+          }));
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.sortData();
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching banners:', error);
+        if (error.status === 401 || error.status === 403) {
+          console.log('Token expired or unauthorized');
+          this.authService.logout(); // ล้าง token และข้อมูล user
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -181,56 +156,62 @@ export class ColumnPageMockupComponent implements OnInit {
   }
 
   search() {
-    let filteredData = MOCK_DATA.meta.response_data;
 
-    // Filter by user received
+
+    const token = this.authService.getToken();
+    const headers = { 'Authorization': `Bearer ${token}` };
+
+    // Prepare search parameters
+    const searchParams = new URLSearchParams();
+
     if (this.filterUserReceived && this.filterUserReceived !== 'all') {
-      filteredData = filteredData.filter(item =>
-        item.user_received === this.filterUserReceived
-      );
+      searchParams.append('user_received', this.filterUserReceived);
     }
 
-    // Filter by status
     if (this.filterStatus && this.filterStatus !== 'all') {
-      filteredData = filteredData.filter(item =>
-        item.status === this.filterStatus
-      );
+      searchParams.append('status', this.filterStatus);
     }
 
-    // Filter by publish date range
     if (this.publishDateRange.start && this.publishDateRange.end) {
-      filteredData = filteredData.filter(item => {
-        const publishDate = new Date(item.publish_start);
-        return publishDate >= this.publishDateRange.start! &&
-          publishDate <= this.publishDateRange.end!;
-      });
+      searchParams.append('publish_start', this.publishDateRange.start.toISOString());
+      searchParams.append('publish_end', this.publishDateRange.end.toISOString());
     }
 
-    // Filter by create date range
     if (this.createDateRange.start && this.createDateRange.end) {
-      filteredData = filteredData.filter(item => {
-        const createDate = new Date(item.create_at);
-        return createDate >= this.createDateRange.start! &&
-          createDate <= this.createDateRange.end!;
-      });
+      searchParams.append('create_start', this.createDateRange.start.toISOString());
+      searchParams.append('create_end', this.createDateRange.end.toISOString());
     }
 
-    // Update table data
-    this.dataSource.data = filteredData.map(item => ({
-      no: item.id,
-      image: item.image,
-      user_received: item.user_received,
-      navTo: item.nav_to,
-      view: item.view,
-      click: item.click,
-      publishDate: new Date(item.publish_start).toLocaleDateString(),
-      publish_end: new Date(item.publish_end).toLocaleDateString(),
-      create_by: item.create_by,
-      last_update_by: item.last_update_by,
-      createDate: new Date(item.create_at).toLocaleDateString(),
-      lastUpdate: new Date(item.last_update_at).toLocaleDateString(),
-      status: item.status
-    }));
+    // Call API with search parameters
+    this.http.get(`${this.apiUrl}?${searchParams.toString()}`, { headers }).subscribe({
+      next: (response: any) => {
+        if (response?.meta?.response_data) {
+          this.dataSource.data = response.meta.response_data.map((item: any) => ({
+            no: item.id,
+            image: item.image,
+            user_received: item.user_received,
+            navTo: item.nav_to,
+            view: item.view,
+            click: item.click,
+            publishDate: new Date(item.publish_start).toLocaleDateString(),
+            publish_end: new Date(item.publish_end).toLocaleDateString(),
+            create_by: item.create_by,
+            last_update_by: item.last_update_by,
+            createDate: new Date(item.create_at).toLocaleDateString(),
+            lastUpdate: new Date(item.last_update_at).toLocaleDateString(),
+            status: item.status
+          }));
+        }
+      },
+      error: (error) => {
+        console.error('Error searching banners:', error);
+        if (error.status === 401 || error.status === 403) {
+          console.log('Token expired or unauthorized');
+          this.authService.logout();
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 
   reset() {

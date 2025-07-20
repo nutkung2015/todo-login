@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="filters" fxLayout="row">
+        <mat-form-field appearance="fill" class="search" fxLayout="column">
+            <mat-label>Search models</mat-label>
+            <input matInput [formControl]="searchControl" placeholder="Search models...">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="brand-filter" fxLayout="column">
+            <mat-label>Select Brand</mat-label>
+            <mat-select [formControl]="selectedBrand">
+                <mat-option [value]="null">All Brands</mat-option>
+                <mat-option *ngFor="let brand of name_brands" [value]="brand.Id_Brand" style="color: black !important;"
+                    class="brand-option">
+                    <span style="color:  black;">
+                        {{brand.Name}}
+                    </span>
+
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="cards-container" style="padding: 12px;">
+        <mat-card class="card" *ngFor="let model of filteredModels">
+            <mat-card-title style="margin: 10px;">{{model.NameModel}}</mat-card-title>
+            <mat-card-content>
+                <div class="image"
+                    style="display: flex; justify-content: center; align-items: center;  height: 200px; width: 250px;">
+                    <img src="https://www.tesla.com/ownersmanual/images/GUID-B5641257-9E85-404B-9667-4DA5FDF6D2E7-online-en-US.png"
+                        alt="" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <p style="margin: 10px;">Brand:
+                    {{getBrandNameById(model.Id_Brand)}}</p>
+                <!-- <p>Model ID: {{model.Id_model}}</p> -->
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

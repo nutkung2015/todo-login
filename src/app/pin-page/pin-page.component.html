@@ -1,0 +1,41 @@
+<div class="pin-container">
+  <button class="back-button" routerLink="/home">←</button>
+  <div class="pin-left">
+    <img src="assets/image/img1.jpg" alt="placeholder" class="pin-image" />
+  </div>
+  <div class="pin-right">
+    <div class="header">
+      <h1 style="color: white;">
+        ใส้รหัสโทรศัพท์เค้า🎁
+      </h1>
+    </div>
+    <div class="pin-display" [class.error]="error">
+      <span *ngFor="let d of [0,1,2,3]">
+        <span class="dot">{{ pin[d] ? '●' : '○' }}</span>
+      </span>
+    </div>
+    <div class="pin-keypad">
+      <div class="row">
+        <button (click)="onKey('1')">1</button>
+        <button (click)="onKey('2')">2</button>
+        <button (click)="onKey('3')">3</button>
+      </div>
+      <div class="row">
+        <button (click)="onKey('4')">4</button>
+        <button (click)="onKey('5')">5</button>
+        <button (click)="onKey('6')">6</button>
+      </div>
+      <div class="row">
+        <button (click)="onKey('7')">7</button>
+        <button (click)="onKey('8')">8</button>
+        <button (click)="onKey('9')">9</button>
+      </div>
+      <div class="row">
+        <button (click)="onDelete()">⌫</button>
+        <button (click)="onKey('0')">0</button>
+        <button disabled></button>
+      </div>
+    </div>
+    <div *ngIf="error" class="pin-error">รหัสผิด ลองใหม่อีกครั้ง</div>
+  </div>
+</div> 

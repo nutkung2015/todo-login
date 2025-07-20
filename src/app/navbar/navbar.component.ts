@@ -57,4 +57,10 @@ export class NavbarComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  logout() {
+    // Optional: Clear any stored user data or tokens here
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

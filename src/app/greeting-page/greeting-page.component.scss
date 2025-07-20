@@ -1,0 +1,88 @@
+.greeting-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffb6e6 0%, #ff6fd8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #fff0fa;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 111, 216, 0.2);
+  transition: transform 0.2s, background 0.2s;
+  font-size: 1.5rem;
+}
+.back-button:hover {
+  transform: scale(1.1);
+  background: #ffb6e6;
+}
+
+.greeting-container {
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+h1 {
+  color: #ff3e9d;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+.greeting-card {
+  background: #fff0fa;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(255, 111, 216, 0.12);
+  padding: 2rem 1.2rem;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  color: #b4005a;
+  font-weight: 500;
+  line-height: 2.1rem;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+.big-heart {
+  font-size: 2.2rem;
+  display: block;
+  margin-top: 1rem;
+}
+button {
+  background: #ffb6e6;
+  color: #b4005a;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 0.5rem;
+}
+button:hover {
+  background: #ff3e9d;
+  color: #fff;
+}
+.greeting-bg, .greeting-container, h1, .greeting-card, .big-heart, button {
+  font-family: 'IBM Plex Sans Thai Looped', 'IBM Plex Sans', sans-serif !important;
+}
+@media (max-width: 600px) {
+  .greeting-card {
+    font-size: 1.05rem;
+    padding: 1.2rem 0.5rem;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+} 

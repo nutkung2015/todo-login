@@ -1,0 +1,12 @@
+<div class="collections-container">
+    <div *ngIf="isLoading">Loading collections...</div>
+
+    <div *ngFor="let collection of collectionsData" class="collection-card">
+        <h2>Collection: {{ collection.collectionName }}</h2>
+        <div class="data-container">
+            <div *ngFor="let item of collection.data" class="data-item">
+                <pre>{{ item | json }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

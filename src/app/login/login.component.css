@@ -71,3 +71,21 @@
   .login-button:active {
     transform: scale(0.98);
   }
+
+  .register-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-button {
+    background: none;
+    border: none;
+    color: #1976d2;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0 5px;
+}
+
+.register-button:hover {
+    color: #1565c0;
+}

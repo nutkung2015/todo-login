@@ -8,6 +8,12 @@
 
     <div class="banner-container">
         <div class="status-section">
+            <div class="action-buttons">
+                <button mat-raised-button color="primary" (click)="openUpdateDialog()">
+                    <mat-icon>edit</mat-icon>
+                    Update Banner
+                </button>
+            </div>
             <div class="status-item">
                 <div class="label">Status</div>
                 <div class="value status-badge" [ngClass]="'status-' + bannerDetail.status">{{bannerDetail.status}}
@@ -20,14 +26,9 @@
                 <div class="sub-text">By: {{bannerDetail.create_by}}</div>
             </div>
             <div class="status-item">
-                <div class="label">Published Date</div>
+                <div class="label">Create Date</div>
                 <div class="value">{{bannerDetail.createDate | date:'dd MMM yyyy HH:mm:ss'}}</div>
                 <div class="sub-text">By: {{bannerDetail.create_by}}</div>
-            </div>
-            <div class="status-item">
-                <div class="label">Created Date</div>
-                <div class="value">{{bannerDetail.lastUpdate | date:'dd MMM yyyy HH:mm:ss'}}</div>
-                <div class="sub-text">By: {{bannerDetail.last_update_by}}</div>
             </div>
         </div>
 

@@ -1,0 +1,92 @@
+.home-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffb6e6 0%, #ff6fd8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-container {
+  max-width: 1024px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+h1 {
+  color: #ff3e9d;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+.card-list {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card {
+  background: #fff0fa;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(255, 111, 216, 0.12);
+  padding: 1.5rem 1rem;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 2px solid #ffb6e6;
+  text-decoration: none;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(255, 111, 216, 0.22);
+  border-color: #ff3e9d;
+}
+.card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  box-shadow: 0 2px 8px #ffb6e6;
+}
+.card h2 {
+  color: #ff3e9d;
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.2rem 0;
+}
+.card p {
+  color: #b4005a;
+  font-size: 1rem;
+  margin: 0;
+}
+.home-bg, .home-container, h1, .card-list, .card, .card h2, .card p {
+  font-family: 'IBM Plex Sans Thai Looped', 'IBM Plex Sans', sans-serif !important;
+}
+@media (max-width: 1024px) {
+  .home-container {
+    padding: 1.5rem;
+  }
+  .card-list {
+    gap: 1.5rem;
+  }
+  .card {
+    width: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .card-list {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  .card {
+    width: 90vw;
+    max-width: 320px;
+  }
+  .home-container {
+    padding: 1rem;
+  }
+} 

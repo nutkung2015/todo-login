@@ -1,0 +1,23 @@
+<div class="game-bg">
+  <button class="back-button" routerLink="/home">←</button>
+  <div class="game-container">
+    <h1>มินิเกมจับคู่รูปภาพ</h1>
+    <div class="card-grid">
+      <div class="card" *ngFor="let card of cards; let i = index" [class.revealed]="card.revealed || card.matched" (click)="onCardClick(i)">
+        <div class="card-inner">
+          <div class="card-front"></div>
+          <div class="card-back">
+            <img [src]="card.img" alt="cat" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isWin()" class="win-message">
+      🎉 เก่งมาก! จับคู่ครบแล้ว 🎉
+      <button (click)="resetGame()">เล่นใหม่</button>
+    </div>
+    <div *ngIf="!isWin()" class="reset-btn">
+      <button (click)="resetGame()">เริ่มใหม่</button>
+    </div>
+  </div>
+</div> 

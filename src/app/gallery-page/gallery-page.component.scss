@@ -1,0 +1,101 @@
+.gallery-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffb6e6 0%, #ff6fd8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #fff0fa;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 111, 216, 0.2);
+  transition: transform 0.2s, background 0.2s;
+  font-size: 1.5rem;
+}
+.back-button:hover {
+  transform: scale(1.1);
+  background: #ffb6e6;
+}
+.gallery-container {
+  max-width: 1024px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+h1 {
+  color: #ff3e9d;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.gallery-grid img {
+  width: 100%;
+  height: 160px;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(255, 111, 216, 0.18);
+  border: 3px solid #fff0fa;
+  object-fit: cover;
+  transition: transform 0.18s;
+  aspect-ratio: 1;
+}
+.gallery-grid img:hover {
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: 0 8px 32px #ffb6e6;
+}
+button {
+  background: #ffb6e6;
+  color: #b4005a;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 0.5rem;
+}
+button:hover {
+  background: #ff3e9d;
+  color: #fff;
+}
+.gallery-bg, .gallery-container, h1, .gallery-grid, button {
+  font-family: 'IBM Plex Sans Thai Looped', 'IBM Plex Sans', sans-serif !important;
+}
+@media (max-width: 1024px) {
+  .gallery-container {
+    padding: 1.5rem;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .gallery-container {
+    padding: 1rem;
+  }
+} 
